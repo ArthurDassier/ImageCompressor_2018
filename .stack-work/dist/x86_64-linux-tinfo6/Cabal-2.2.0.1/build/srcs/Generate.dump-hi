@@ -1,0 +1,155 @@
+
+==================== FINAL INTERFACE ====================
+2019-03-25 09:30:20.682053229 UTC
+
+interface deBruijn-0.1.0.0-3y7lalbVcR6Jq5mG6ZfyWc:Generate 8044
+  interface hash: 68388ae677ddca3fc1fbc320881cc54b
+  ABI hash: 04b813f697f8b13b62458f878fddb0af
+  export-list hash: f72bc2150567417c3b82b5768eeca960
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 476b4d20104f1cac6d0ddc47500bed3d
+  opt_hash: 14e536840aca4e889cad654e6f9b79c1
+  hpc_hash: 93b885adfe0da089cdf634904fd59f71
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Generate.generate
+  Generate.generateStart
+  Generate.takeLastN
+module dependencies: Check Unique
+package dependencies: base-4.11.1.0 ghc-prim-0.5.2.0
+                      integer-gmp-1.0.2.0
+orphans: base-4.11.1.0:GHC.Float base-4.11.1.0:GHC.Base
+family instance modules: base-4.11.1.0:Control.Applicative
+                         base-4.11.1.0:Data.Functor.Const
+                         base-4.11.1.0:Data.Functor.Identity base-4.11.1.0:Data.Monoid
+                         base-4.11.1.0:Data.Semigroup.Internal base-4.11.1.0:GHC.Generics
+                         base-4.11.1.0:GHC.IO.Exception
+import  -/  base-4.11.1.0:Data.Foldable 8ed35c38958063956af33c935ea03444
+import  -/  base-4.11.1.0:Debug.Trace ec3b3fe30e7dee9ae775eb1dae78f9d5
+import  -/  base-4.11.1.0:GHC.Base 604111500e81281298777e721c75643b
+import  -/  base-4.11.1.0:GHC.List 1e4357702d8d00cded0703bd293e50e8
+import  -/  base-4.11.1.0:GHC.Num 8e54b26dce4495382dc4b50cf36ab754
+import  -/  base-4.11.1.0:GHC.Real b4beb0389ba1ad5d9640aae67848c5d3
+import  -/  base-4.11.1.0:Prelude 0750c25585e2b797cd78291d423d39dd
+import  -/  base-4.11.1.0:System.Exit a7af6f90beaa15182d3a20667d878df0
+import  -/  base-4.11.1.0:System.IO 40b9aff18a55c99eb253f9a43ff9b627
+import  -/  Unique fe0510e7ec95aa8529d331e7b3b53e46
+  exports: e81d92e055206501faa2210f2c6d2efb
+  uniqueN 2bfd76b9c52af9ff8dcc50fc50188744
+import  -/  ghc-prim-0.5.2.0:GHC.Classes 122abfcd7450c6c11602933c9ca5f80d
+import  -/  ghc-prim-0.5.2.0:GHC.Types d9b3023de7feae4a5308d643da5543f7
+9ebcb7ad752846fcfcb15ca19a9c7dbc
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   Generate.$trModule3
+                   Generate.$trModule1) -}
+a2a4942d1dfd11e0da4a85690d82e8a8
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Generate.$trModule2) -}
+f8ce477a88ed991daf6263ee707f2a32
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Generate"#) -}
+7c5af4077334feeedbf6afb3e2f3441f
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Generate.$trModule4) -}
+7a0d8e789fdb2ac98bdf6f59962e48c8
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("deBruijn-0.1.0.0-3y7lalbVcR6Jq5mG6ZfyWc"#) -}
+70cdf43d03cc247f314c9633212aad55
+  $wgenerate ::
+    GHC.Base.String
+    -> GHC.Prim.Int#
+    -> GHC.Base.String
+    -> GHC.Types.Int
+    -> GHC.Types.IO ()
+  {- Arity: 4, Strictness: <S,U><S,U><L,U><L,U(U)>, Inline: [0] -}
+7395c501571b84be78233bca561944df
+  $wgenerateStart ::
+    GHC.Base.String
+    -> GHC.Base.String -> GHC.Prim.Int# -> GHC.Base.String
+  {- Arity: 3, Strictness: <L,U><S,1*U><S,1*U>, Inline: [0] -}
+3f248f7d0c49e787b58d98d9ee43fe9a
+  $wtakeLastN ::
+    GHC.Base.String
+    -> GHC.Prim.Int# -> [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 3, Strictness: <L,1*U><S,U><L,1*U>, Inline: [0],
+     Unfolding: (\ (w :: GHC.Base.String)
+                   (ww :: GHC.Prim.Int#)
+                   (w1 :: [GHC.Types.Char]) ->
+                 let {
+                   y :: GHC.Prim.Int# = GHC.Prim.-# ww 1#
+                 } in
+                 case GHC.Prim.<# 0# y of lwild {
+                   DEFAULT -> GHC.Base.++ @ GHC.Types.Char Generate.takeLastN1 w1
+                   1#
+                   -> GHC.Base.++
+                        @ GHC.Types.Char
+                        (GHC.List.reverse1
+                           @ GHC.Types.Char
+                           (GHC.List.$wunsafeTake
+                              @ GHC.Types.Char
+                              y
+                              (GHC.List.reverse1
+                                 @ GHC.Types.Char
+                                 w
+                                 (GHC.Types.[] @ GHC.Types.Char)))
+                           (GHC.Types.[] @ GHC.Types.Char))
+                        w1 }) -}
+897ceb9d3204764873f5de2ba2c6ec2d
+  generate ::
+    GHC.Base.String
+    -> GHC.Types.Int
+    -> GHC.Base.String
+    -> GHC.Types.Int
+    -> GHC.Types.IO ()
+  {- Arity: 4, Strictness: <S,U><S(S),1*U(U)><L,U><L,U(U)>,
+     Inline: [0],
+     Unfolding: InlineRule (4, True, False)
+                (\ (w :: GHC.Base.String)
+                   (w1 :: GHC.Types.Int)
+                   (w2 :: GHC.Base.String)
+                   (w3 :: GHC.Types.Int) ->
+                 case w1 of ww { GHC.Types.I# ww1 ->
+                 Generate.$wgenerate w ww1 w2 w3 }) -}
+2e094bde3e8de9cc5b8b92c7e71cc3fd
+  generateStart ::
+    GHC.Base.String
+    -> GHC.Base.String -> GHC.Types.Int -> GHC.Base.String
+  {- Arity: 3, Strictness: <L,U><S,1*U><S(S),1*U(1*U)>, Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Base.String)
+                   (w1 :: GHC.Base.String)
+                   (w2 :: GHC.Types.Int) ->
+                 case w2 of ww { GHC.Types.I# ww1 ->
+                 Generate.$wgenerateStart w w1 ww1 }) -}
+3670e8a5603a932714912562b776336c
+  takeLastN ::
+    GHC.Base.String
+    -> GHC.Types.Int -> [GHC.Types.Char] -> GHC.Base.String
+  {- Arity: 3, Strictness: <L,1*U><S(S),1*U(U)><L,1*U>, Inline: [0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Base.String)
+                   (w1 :: GHC.Types.Int)
+                   (w2 :: [GHC.Types.Char]) ->
+                 case w1 of ww { GHC.Types.I# ww1 ->
+                 Generate.$wtakeLastN w ww1 w2 }) -}
+b269f45f52d87fe1119ebf5970aab6d1
+  takeLastN1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.List.reverse1
+                   @ GHC.Types.Char
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+
