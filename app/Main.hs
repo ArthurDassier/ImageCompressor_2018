@@ -1,39 +1,35 @@
 import System.Environment
 import System.Exit
+import System.IO
 import Data.Char
 import Data.List
 import Debug.Trace
 import Text.Read
---
--- type Color = (Double, Double, Double)
--- type Point = (Int, Int)
--- type Nomadefinir = (Point, Color)
+import Data.List
 
+-- type Point (Double, Double)
+-- type Color (Double, Double, Double)
 
--- distance :: Color -> Color -> Double
--- distance (ux, uy, uz) (vx, vy, vz) = sqrt (((ux - vx) ^ 2) + ((uy - vy) ^ 2) + ((uz - vz) ^ 2))
---
--- fileToArray :: [String] -> [nomADefinir] -> Int -> [nomADefinir]
--- fileToArray line array 0 = array
--- fileToArray line array idx =
---
--- findMin :: Color -> [String] -> Int -> Color -> Color
--- findMin (ux, uy, uz) line idx mini | idx == 0 = findMin (ux, uy, uz) line (idx + 1) ((map read $ words (line !! idx) :: [Color]) !! 0)
---                          | idx == length (line) - 1 = mini
---                          | distance mini (ux, uy, uz) < distance ((map read $ words (line !! idx) :: [Color]) !! 0) (ux, uy, uz) = findMin (ux, uy, uz) line (idx + 1) mini
---                          | otherwise =  findMin (ux, uy, uz) line (idx + 1) ((map read $ words (line !! idx) :: [Color]) !! 0)
--- --
+-- data Image = Image Int, Int, Int, Int, Int deriving (show)
+-- square :: Int -> Int -> Double
+-- square a b = ((a - b) ^ 2)
 
-handleArg :: [String] -> IO()
-handleArg [n, e, file] = do print "a"
+isParenthesis :: Char -> Bool
+isParenthesis c
+    | c == '(' || ord c == ')' = True
+    | otherwise = False
 
-main = do
-    print("a")
-    -- args <- getArgs
-    -- content <- readFile (args !! 0)
-    -- let linesOfFiles = lines content
-    -- print linesOfFiles
+    -- replaceO = map (\c -> if c=='O' then 'X'; else c)
 
--- main = getArgs >>= handleArg
+split :: String -> Int -> String -> [String] -> [String]
+split [] _ _ _ = []
+split _ 180 _ _ = []
+split file index str list
+    | (length file - 1) == index = list
+    | (file !! index) /= '\n' = split file (index + 1) (str ++ [(file !! index)]) list
+    | otherwise = split file (index + 1) [] (list ++ [str])
 
--- main = do
+main = do  
+    handle <- openFile "example.txt" ReadMode
+    contents <- hGetContents handle
+    print (split contents 0 [] [])
