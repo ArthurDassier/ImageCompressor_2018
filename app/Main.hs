@@ -39,7 +39,12 @@ replaceArray array result c1 c2 index
     | (length array) == 0 = result
     | otherwise = replaceArray (tail array) (result ++ [(replaceString (head array) [] c1 c2 (length (head array)))]) c1 c2 (index + 1)
 
-main = do  
+stringToInt :: [String] -> Int -> [[Int]] -> [[Int]]
+stringToInt array idx result
+    | length (array) == idx = result
+    | otherwise = stringToInt array (idx + 1) (read (array !! idx):result)
+
+main = do
     handle <- openFile "example.txt" ReadMode
     contents <- hGetContents handle
-    print (replaceArray (replaceArray (replaceArray (replaceStringFirst (split contents 0 [] []) 0 []) [] ' ' ',' 0) [] ')' ' ' 0) [] '(' ' ' 0)
+    print (stringToInt (replaceArray (replaceArray (replaceArray (replaceStringFirst (split contents 0 [] []) 0 []) [] ' ' ',' 0) [] ')' ' ' 0) [] '(' ' ' 0) 0 [])
