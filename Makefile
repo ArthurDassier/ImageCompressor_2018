@@ -1,17 +1,13 @@
 ##
 ## EPITECH PROJECT, 2017
-## deBruijn
+## imageCompressor
 ## File description:
 ## Makefile
 ##
 
-NAME	=	deBruijn
+NAME	=	imageCompressor
 
 SRC	=	./app/Main.hs\
-		./srcs/Generate.hs\
-		./srcs/Unique.hs\
-		./srcs/Check.hs\
-		./srcs/Utils.hs\
 
 all:	$(NAME)
 
@@ -20,7 +16,7 @@ $(NAME): $(SRC)
 
 clean:
 	stack clean
-	rm .stack-work deBruijn.cabal -rf
+	rm .stack-work imageCompressor.cabal -rf
 
 fclean:	clean
 	$(RM) $(NAME)

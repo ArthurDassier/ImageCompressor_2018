@@ -1,1 +1,1 @@
-# deBruijn
+# imageCompressor
