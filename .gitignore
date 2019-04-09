@@ -1,0 +1,6 @@
+imageCompressor
+imageCompressor.cabal
+*.o
+.vscode
+*.hi
+.stack-work
