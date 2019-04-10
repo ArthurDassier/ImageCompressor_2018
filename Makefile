@@ -9,6 +9,7 @@ NAME	=	imageCompressor
 
 SRC	=	./app/Main.hs		\
 		./src/Parsing.hs	\
+		./src/Extract.hs	\
 
 all:	$(NAME)
 

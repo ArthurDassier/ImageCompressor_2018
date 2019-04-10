@@ -3,46 +3,29 @@
 -- File description:
 -- Parsing
 
-module Parsing (replaceStringSecond,
-                replaceStringFirst,
-                split,
-                replaceChar,
-                replaceString,
-                replaceArray,
-                stringToInt) where
+module Parsing (makeColor,
+                makePoint,
+                makeStructure,
+                makeStruct) where
 
-replaceStringSecond :: [String] -> Int -> [String] -> [String]
-replaceStringSecond array index result
-    | (length array) == index = result
-    | otherwise = replaceStringSecond array (index + 1) (result ++ [((init (array !! index)) ++ [']'])])
+import Extract
 
-replaceStringFirst :: [String] -> Int -> [String] -> [String]
-replaceStringFirst array index result
-    | (length array) == index = replaceStringSecond result 0 []
-    | otherwise = replaceStringFirst array (index + 1) (result ++ [(['['] ++ (tail (array !! index)))])
+type Point = (Int, Int)
+type Color = (Int, Int, Int)
+data Structure = Structure Int Int Int Int Int deriving Show
 
-split :: String -> Int -> String -> [String] -> [String]
-split file index str list
-    | (length file) == index = list
-    | (file !! index) /= '\n' = split file (index + 1) (str ++ [(file !! index)]) list
-    | otherwise = split file (index + 1) [] (list ++ [str])
+--toto (Structure a, c, s, e, r) = 
 
-replaceChar :: Char -> Char -> Char -> Char
-replaceChar c toReplace new
-    | c == toReplace = new
-    | otherwise = c
+makeColor :: String -> Color
+makeColor toRead = read toRead :: (Int, Int, Int)
 
-replaceString :: String -> String -> Char -> Char -> Int -> String
-replaceString array result c1 c2 index
-    | 0 == index = result
-    | otherwise = replaceString (tail array) (result ++ [(replaceChar (head array) c1 c2)]) c1 c2 (index - 1)
+makePoint :: String -> Point
+makePoint toRead = read toRead :: (Int, Int)
 
-replaceArray :: [String] -> [String] -> Char -> Char -> Int -> [String]
-replaceArray array result c1 c2 index
-    | (length array) == 0 = result
-    | otherwise = replaceArray (tail array) (result ++ [(replaceString (head array) [] c1 c2 (length (head array)))]) c1 c2 (index + 1)
+makeStructure :: Point -> Color -> Structure
+makeStructure point color = (Structure (fst point) (snd point) (fstt color) (sndt color) (endt color))
 
-stringToInt :: [String] -> Int -> [[Int]] -> [[Int]]
-stringToInt array idx result
-    | length (array) == idx = result
-    | otherwise = stringToInt array (idx + 1) (read (array !! idx):result)
+makeStruct :: [String] -> [Structure] -> [Structure]
+makeStruct contents result
+    | (length contents) == 0 = result
+    | otherwise = makeStruct (tail (tail contents)) (result ++ [(makeStructure (makePoint (head contents)) (makeColor (head (tail contents))))])
