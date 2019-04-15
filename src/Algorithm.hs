@@ -1,13 +1,22 @@
+-- EPITECH PROJECT, 2019
+-- FUN_imageCompressor_2019
+-- File description:
+-- Algorithm
+
 module Algorithm (findMin) where
+
+import Extract
 import Parsing
+
 
 distance :: Color -> Color -> Double
 distance (ux, uy, uz) (vx, vy, vz) = sqrt (((ux - vx) ^ 2) + ((uy - vy) ^ 2) + ((uz - vz) ^ 2))
 
+
 findMin :: Color -> [Centroid] -> Int -> Centroid -> Centroid
 findMin (ux, uy, uz) centroid idx mini
         | idx == 0 = findMin (ux, uy, uz) centroid (idx + 1) (centroid !! 0)
-        | idx == length (centroid) - 1 = mini
+        | idx == (length centroid) = mini
         | distance ((intToTuple (centroidGetR (mini)) (centroidGetG (mini)) (centroidGetB (mini)))) (ux, uy, uz) < distance ((intToTuple (centroidGetR (centroid !! idx)) (centroidGetG (centroid !! idx)) (centroidGetB (centroid !! idx)))) (ux, uy, uz) = findMin (ux, uy, uz) centroid (idx + 1) mini
         | otherwise = findMin (ux, uy, uz) centroid (idx + 1) (centroid !! idx)
 

@@ -6,12 +6,11 @@
 import System.IO
 import System.Environment
 import System.Random
+
 import Parsing
 import Algorithm
 import Extract
 
-type Point = (Int, Int)
---
 -- distance :: Color -> Color -> Double
 -- distance (ux, uy, uz) (vx, vy, vz) = sqrt (((ux - vx) ^ 2) + ((uy - vy) ^ 2) + ((uz - vz) ^ 2))
 --
@@ -28,7 +27,7 @@ getRandomStructure array n seed = (array !! (fst(randomR (0,n) (mkStdGen seed)))
 
 fromRandomToCendroid :: Int-> Int -> [Structure] -> Int -> [Centroid] -> [Centroid]
 fromRandomToCendroid n seed struct 0 array = array
-fromRandomToCendroid n seed struct idx array = fromRandomToCendroid n (seed + 10) struct (idx - 1) ([(makeCentroid (getRandomStructure struct n seed))]++array)
+fromRandomToCendroid n seed struct idx array = fromRandomToCendroid n (seed + 10) struct (idx - 1) ([(makeCentroid (getRandomStructure struct n seed))] ++ array)
 
 
 main :: IO()
