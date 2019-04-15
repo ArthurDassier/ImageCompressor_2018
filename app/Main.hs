@@ -28,10 +28,10 @@ findIndexCentroid r g b index array
     | otherwise = findIndexCentroid r g b (index + 1) array
 
 sendRgb :: [Pixel] -> Int -> [Centroid] -> [Centroid] -> [Centroid]
-sendRgb array (-1) centroid result = result
+sendRgb array 0 centroid result = result
 sendRgb array index centroid result = do
     let centroidIndex = findIndexCentroid (centroidGetR (pixelGetC (array !! index))) (centroidGetG (pixelGetC (array !! index))) (centroidGetB (pixelGetC (array !! index))) 0 centroid
-    sendRgb array (index - 1) centroid (result ++ [(Centroid (centroidGetX (centroid !! centroidIndex)) (centroidGetY (centroid !! centroidIndex)) (centroidGetR (centroid !! centroidIndex)) (centroidGetG (centroid !! centroidIndex)) (centroidGetB (centroid !! centroidIndex)) (centroidGetP (centroid !! index) ++ [(array !! index)]))])
+    sendRgb array (index - 1) centroid (result ++ [(Centroid (centroidGetX (centroid !! centroidIndex)) (centroidGetY (centroid !! centroidIndex)) (centroidGetR (centroid !! centroidIndex)) (centroidGetG (centroid !! centroidIndex)) (centroidGetB (centroid !! centroidIndex)) (centroidGetP (centroid !! centroidIndex) ++ [(array !! index)]))])
 
 
 getRandomPixel :: [Pixel] -> Int -> Pixel
@@ -52,3 +52,4 @@ main = do
     let centroid = fromRandomToCendroid 0 struct 3 []
     -- print centroid
     print (findNearestCentroid 0 struct [] centroid)
+    print (sendRgb struct (length struct - 1) centroid [])
