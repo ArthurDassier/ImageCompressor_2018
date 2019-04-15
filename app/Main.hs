@@ -21,13 +21,12 @@ import Extract
 --     | distance mini (ux, uy, uz) < distance ((map read $ words (line !! idx) :: [Color]) !! 0) (ux, uy, uz) = findMin (ux, uy, uz) line (idx + 1) mini
 --     | otherwise =  findMin (ux, uy, uz) line (idx + 1) ((map read $ words (line !! idx) :: [Color]) !! 0)
 
-getRandomStructure :: [Structure] -> Int -> Int -> Structure
-getRandomStructure array n seed = (array !! (fst(randomR (0,n) (mkStdGen seed))))
+getRandomStructure :: [Structure] -> Int -> Structure
+getRandomStructure array n = (array !! n)
 
-
-fromRandomToCendroid :: Int-> Int -> [Structure] -> Int -> [Centroid] -> [Centroid]
-fromRandomToCendroid n seed struct 0 array = array
-fromRandomToCendroid n seed struct idx array = fromRandomToCendroid n (seed + 10) struct (idx - 1) ([(makeCentroid (getRandomStructure struct n seed))] ++ array)
+fromRandomToCendroid :: Int -> [Structure] -> Int -> [Centroid] -> [Centroid]
+fromRandomToCendroid n struct 0 array = array
+fromRandomToCendroid n struct idx array = fromRandomToCendroid (n + 1) struct (idx - 1) ([(makeCentroid (getRandomStructure struct n))] ++ array)
 
 
 main :: IO()
@@ -36,5 +35,6 @@ main = do
     handle <- openFile "example.txt" ReadMode
     contents <- hGetContents handle
     let struct = (makeStruct (words contents) [])
-    print (fromRandomToCendroid 3 10000 struct 3 [])
-    -- ((makeStruct (words contents) []))
+    let centroid = fromRandomToCendroid 0 struct 3 []
+    -- print centroid
+    print (findNearestCentroid 0 struct [] centroid)

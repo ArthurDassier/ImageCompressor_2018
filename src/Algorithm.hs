@@ -3,7 +3,7 @@
 -- File description:
 -- Algorithm
 
-module Algorithm (findMin) where
+module Algorithm (findNearestCentroid) where
 
 import Extract
 import Parsing
