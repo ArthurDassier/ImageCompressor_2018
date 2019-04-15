@@ -21,8 +21,8 @@ findMin (ux, uy, uz) centroid idx mini
         | otherwise = findMin (ux, uy, uz) centroid (idx + 1) (centroid !! idx)
 
 
-findNearestCentroid :: Int -> [Structure] -> [Structure] -> [Centroid] -> [Structure]
+findNearestCentroid :: Int -> [Pixel] -> [Pixel] -> [Centroid] -> [Pixel]
 findNearestCentroid idx array result centroid
     | idx == length (array) = result
     | otherwise
-     = findNearestCentroid (idx + 1) array ([(Structure (structureGetX ((array !! idx))) (structureGetY ((array !! idx))) (structureGetR ((array !! idx))) (structureGetG ((array !! idx))) (structureGetB ((array !! idx))) (findMin (intToTuple (structureGetR (array !! idx)) (structureGetG (array !! idx)) (structureGetB (array !! idx))) centroid 0 (centroid !! 0)))] ++ result) centroid
+     = findNearestCentroid (idx + 1) array ([(Pixel (pixelGetX ((array !! idx))) (pixelGetY ((array !! idx))) (pixelGetR ((array !! idx))) (pixelGetG ((array !! idx))) (pixelGetB ((array !! idx))) (findMin (intToTuple (pixelGetR (array !! idx)) (pixelGetG (array !! idx)) (pixelGetB (array !! idx))) centroid 0 (centroid !! 0)))] ++ result) centroid

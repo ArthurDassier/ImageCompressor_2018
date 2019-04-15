@@ -4,3 +4,5 @@ imageCompressor.cabal
 .vscode
 *.hi
 .stack-work
+result
+result2

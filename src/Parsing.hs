@@ -8,11 +8,11 @@ module Parsing where
 import Extract
 
 
-makeCentroid :: Structure -> Centroid
-makeCentroid (Structure {x = x, y = y, r = r, g = g, b = b}) = (Centroid (x) (y) (r) (g) (b))
+makeCentroid :: Pixel -> Centroid
+makeCentroid (Pixel {x = x, y = y, r = r, g = g, b = b}) = (Centroid (x) (y) (r) (g) (b) [])
 
 
-chooseCentroid :: [Structure] -> Int -> [Centroid] -> [Centroid]
+chooseCentroid :: [Pixel] -> Int -> [Centroid] -> [Centroid]
 chooseCentroid x (-1) array = array
 chooseCentroid x idx array = chooseCentroid x (idx - 1) array
 
@@ -25,11 +25,11 @@ makePoint :: String -> Point
 makePoint toRead = read toRead :: (Int, Int)
 
 
-makeStructure :: Point -> Color -> Structure
-makeStructure point color = (Structure (fst point) (snd point) (fstt color) (sndt color) (endt color) ((Centroid (0) (0) (0) (0) (0))))
+makePixel :: Point -> Color -> Pixel
+makePixel point color = (Pixel (fst point) (snd point) (fstt color) (sndt color) (endt color) ((Centroid (0) (0) (0) (0) (0) [])))
 
 
-makeStruct :: [String] -> [Structure] -> [Structure]
+makeStruct :: [String] -> [Pixel] -> [Pixel]
 makeStruct contents result
     | (length contents) == 0 = result
-    | otherwise = makeStruct (tail (tail contents)) (result ++ [(makeStructure (makePoint (head contents)) (makeColor (head (tail contents))))])
+    | otherwise = makeStruct (tail (tail contents)) (result ++ [(makePixel (makePoint (head contents)) (makeColor (head (tail contents))))])

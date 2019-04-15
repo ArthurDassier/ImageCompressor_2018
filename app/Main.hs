@@ -21,12 +21,26 @@ import Extract
 --     | distance mini (ux, uy, uz) < distance ((map read $ words (line !! idx) :: [Color]) !! 0) (ux, uy, uz) = findMin (ux, uy, uz) line (idx + 1) mini
 --     | otherwise =  findMin (ux, uy, uz) line (idx + 1) ((map read $ words (line !! idx) :: [Color]) !! 0)
 
-getRandomStructure :: [Structure] -> Int -> Structure
-getRandomStructure array n = (array !! n)
+findIndexCentroid :: Double -> Double -> Double -> Int -> [Centroid] -> Int
+findIndexCentroid r g b index array
+    | (length array) == index = 0
+    | r == (centroidGetR (array !! index)) && g == (centroidGetG (array !! index)) && b == (centroidGetB (array !! index)) = index
+    | otherwise = findIndexCentroid r g b (index + 1) array
 
-fromRandomToCendroid :: Int -> [Structure] -> Int -> [Centroid] -> [Centroid]
+sendRgb :: [Pixel] -> Int -> [Centroid] -> [Centroid] -> [Centroid]
+sendRgb array (-1) centroid result = result
+sendRgb array index centroid result = do
+    let centroidIndex = findIndexCentroid (centroidGetR (pixelGetC (array !! index))) (centroidGetG (pixelGetC (array !! index))) (centroidGetB (pixelGetC (array !! index))) 0 centroid
+    sendRgb array (index - 1) centroid (result ++ [(Centroid (centroidGetX (centroid !! centroidIndex)) (centroidGetY (centroid !! centroidIndex)) (centroidGetR (centroid !! centroidIndex)) (centroidGetG (centroid !! centroidIndex)) (centroidGetB (centroid !! centroidIndex)) (centroidGetP (centroid !! index) ++ [(array !! index)]))])
+
+
+getRandomPixel :: [Pixel] -> Int -> Pixel
+getRandomPixel array n = (array !! n)
+
+
+fromRandomToCendroid :: Int -> [Pixel] -> Int -> [Centroid] -> [Centroid]
 fromRandomToCendroid n struct 0 array = array
-fromRandomToCendroid n struct idx array = fromRandomToCendroid (n + 1) struct (idx - 1) ([(makeCentroid (getRandomStructure struct n))] ++ array)
+fromRandomToCendroid n struct idx array = fromRandomToCendroid (n + 1) struct (idx - 1) ([(makeCentroid (getRandomPixel struct n))] ++ array)
 
 
 main :: IO()

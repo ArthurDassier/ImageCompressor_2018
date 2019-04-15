@@ -12,14 +12,15 @@ data Centroid = Centroid {centroidX :: Int,
                           centroidY :: Int,
                           centroidR :: Double,
                           centroidG :: Double,
-                          centroidB :: Double} deriving (Show)
+                          centroidB :: Double,
+                          points :: [Pixel]} deriving (Show)
 
-data Structure = Structure {x :: Int,
-                            y :: Int,
-                            r :: Double,
-                            g :: Double,
-                            b :: Double,
-                            centroid :: Centroid} deriving (Show)
+data Pixel = Pixel {x :: Int,
+                    y :: Int,
+                    r :: Double,
+                    g :: Double,
+                    b :: Double,
+                    centroid :: Centroid} deriving (Show)
 
 
 fstt :: (Color) -> Double
@@ -38,41 +39,49 @@ intToTuple :: Double -> Double -> Double -> Color
 intToTuple x y z = (x, y , z)
 
 
-structureGetX :: Structure -> Int
-structureGetX (Structure {x = x, y = y, r = r, g = g, b = b}) = x
+pixelGetX :: Pixel -> Int
+pixelGetX (Pixel {x = x, y = y, r = r, g = g, b = b, centroid = c}) = x
 
 
-structureGetY :: Structure -> Int
-structureGetY (Structure {x = x, y = y, r = r, g = g, b = b}) = y
+pixelGetY :: Pixel -> Int
+pixelGetY (Pixel {x = x, y = y, r = r, g = g, b = b, centroid = c}) = y
 
 
-structureGetR :: Structure -> Double
-structureGetR (Structure {x = x, y = y, r = r, g = g, b = b}) = r
+pixelGetR :: Pixel -> Double
+pixelGetR (Pixel {x = x, y = y, r = r, g = g, b = b, centroid = c}) = r
 
 
-structureGetG :: Structure -> Double
-structureGetG (Structure {x = x, y = y, r = r, g = g, b = b}) = g
+pixelGetG :: Pixel -> Double
+pixelGetG (Pixel {x = x, y = y, r = r, g = g, b = b, centroid = c}) = g
 
 
-structureGetB :: Structure -> Double
-structureGetB (Structure {x = x, y = y, r = r, g = g, b = b}) = b
+pixelGetB :: Pixel -> Double
+pixelGetB (Pixel {x = x, y = y, r = r, g = g, b = b, centroid = c}) = b
+
+
+pixelGetC :: Pixel -> Centroid
+pixelGetC (Pixel {x = x, y = y, r = r, g = g, b = b, centroid = c}) = c
 
 
 centroidGetX :: Centroid -> Int
-centroidGetX (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b}) = x
+centroidGetX (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b, points = p}) = x
 
 
 centroidGetY :: Centroid -> Int
-centroidGetY (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b}) = y
+centroidGetY (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b, points = p}) = y
 
 
 centroidGetR :: Centroid -> Double
-centroidGetR (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b}) = r
+centroidGetR (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b, points = p}) = r
 
 
 centroidGetG :: Centroid -> Double
-centroidGetG (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b}) = g
+centroidGetG (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b, points = p}) = g
 
 
 centroidGetB :: Centroid -> Double
-centroidGetB (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b}) = b
+centroidGetB (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b, points = p}) = b
+
+
+centroidGetP :: Centroid -> [Pixel]
+centroidGetP (Centroid {centroidX = x, centroidY = y, centroidR = r, centroidG = g, centroidB = b, points = p}) = p
