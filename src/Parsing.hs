@@ -6,15 +6,55 @@
 module Parsing (makeColor,
                 makePoint,
                 makeStructure,
-                makeStruct) where
+                makeStruct,
+                makeCentroid,
+                Centroid,
+                Structure
+                ) where
 
 import Extract
 
 type Point = (Int, Int)
 type Color = (Int, Int, Int)
-data Structure = Structure Int Int Int Int Int deriving Show
+data Structure = Structure { x :: Int
+                     , y :: Int
+                     , r :: Int
+                     , g :: Int
+                     , b :: Int
+                     } deriving (Show)
 
---toto (Structure a, c, s, e, r) = 
+
+--toto (Structure a, c, s, e, r) =
+--
+data Centroid = Centroid { centroidX :: Int
+                     , centroidY :: Int
+                     , centroidR :: Int
+                     , centroidG :: Int
+                     , centroidB :: Int
+                     } deriving (Show)
+
+
+structureGetX :: Structure -> Int
+structureGetX (Structure {x = x, y = y, r = r, g = g, b = b}) = x
+
+structureGetY :: Structure -> Int
+structureGetY (Structure {x = x, y = y, r = r, g = g, b = b}) = y
+
+structureGetR :: Structure -> Int
+structureGetR (Structure {x = x, y = y, r = r, g = g, b = b}) = r
+
+structureGetG :: Structure -> Int
+structureGetG (Structure {x = x, y = y, r = r, g = g, b = b}) = g
+
+structureGetB :: Structure -> Int
+structureGetB (Structure {x = x, y = y, r = r, g = g, b = b}) = b
+
+makeCentroid :: Structure -> Centroid
+makeCentroid (Structure {x = x, y = y, r = r, g = g, b = b}) = (Centroid (x) (y) (r) (g) (b))
+
+chooseCentroid :: [Structure] -> Int -> [Centroid] -> [Centroid]
+chooseCentroid x (-1) array = array
+chooseCentroid x idx array = chooseCentroid x (idx - 1) array
 
 makeColor :: String -> Color
 makeColor toRead = read toRead :: (Int, Int, Int)
