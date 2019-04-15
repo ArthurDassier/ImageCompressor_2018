@@ -11,8 +11,6 @@ import Algorithm
 import Extract
 
 type Point = (Int, Int)
-type Color = (Double, Double, Double)
-type Nomadefinir = (Point, Color)
 --
 -- distance :: Color -> Color -> Double
 -- distance (ux, uy, uz) (vx, vy, vz) = sqrt (((ux - vx) ^ 2) + ((uy - vy) ^ 2) + ((uz - vz) ^ 2))

@@ -7,13 +7,13 @@ module Extract (fstt,
                 sndt,
                 endt) where
 
-type Color = (Int, Int, Int)
+type Color = (Double, Double, Double)
 
-fstt :: (Color) -> Int
+fstt :: (Color) -> Double
 fstt (a,_,_) = a
 
-sndt :: (Color) -> Int
+sndt :: (Color) -> Double
 sndt (_,a,_) = a
 
-endt :: (Color) -> Int
+endt :: (Color) -> Double
 endt (_,_,a) = a
