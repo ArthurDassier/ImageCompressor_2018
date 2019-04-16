@@ -9,7 +9,7 @@ import Extract
 
 
 makeCentroid :: Pixel -> Centroid
-makeCentroid (Pixel {x = x, y = y, r = r, g = g, b = b}) = (Centroid (x) (y) (r) (g) (b) [])
+makeCentroid (Pixel {pixelX = x, pixelY = y, pixelR = r, pixelG = g, pixelB = b}) = (Centroid (x) (y) (r) (g) (b) [])
 
 
 chooseCentroid :: [Pixel] -> Int -> [Centroid] -> [Centroid]
