@@ -6,6 +6,7 @@
 import System.IO
 import System.Environment
 import System.Random
+import Debug.Trace
 
 import Parsing
 import Algorithm
@@ -23,8 +24,8 @@ import Extract
 
 findIndexCentroid :: Double -> Double -> Double -> Int -> [Centroid] -> Int
 findIndexCentroid r g b index array
-    | (length array) == index = 0
-    | r == (centroidGetR (array !! index)) && g == (centroidGetG (array !! index)) && b == (centroidGetB (array !! index)) = index
+    | (length array - 1) == index = 0
+    |  r == (centroidGetR (array !! index)) && g == (centroidGetG (array !! index)) && b == (centroidGetB (array !! index)) = index
     | otherwise = findIndexCentroid r g b (index + 1) array
 
 sendRgb :: [Pixel] -> Int -> [Centroid] -> [Centroid] -> [Centroid]
@@ -42,7 +43,6 @@ fromRandomToCendroid :: Int -> [Pixel] -> Int -> [Centroid] -> [Centroid]
 fromRandomToCendroid n struct 0 array = array
 fromRandomToCendroid n struct idx array = fromRandomToCendroid (n + 1) struct (idx - 1) ([(makeCentroid (getRandomPixel struct n))] ++ array)
 
-
 main :: IO()
 main = do
     arg <- getArgs
@@ -50,6 +50,6 @@ main = do
     contents <- hGetContents handle
     let struct = (makeStruct (words contents) [])
     let centroid = fromRandomToCendroid 0 struct 3 []
-    -- print centroid
-    print (findNearestCentroid 0 struct [] centroid)
-    print (sendRgb struct (length struct - 1) centroid [])
+    let test = findNearestCentroid 0 struct [] centroid
+    print test
+    print (sendRgb test (length test - 1) centroid [])
