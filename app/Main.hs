@@ -22,6 +22,13 @@ import Extract
 --     | distance mini (ux, uy, uz) < distance ((map read $ words (line !! idx) :: [Color]) !! 0) (ux, uy, uz) = findMin (ux, uy, uz) line (idx + 1) mini
 --     | otherwise =  findMin (ux, uy, uz) line (idx + 1) ((map read $ words (line !! idx) :: [Color]) !! 0)
 
+deleteIndex :: [Centroid] -> Int -> Int -> [Centroid] -> [Centroid]
+deleteIndex array todelete index result
+    | index == 0 = result
+    | index == todelete = deleteIndex array todelete (index - 1) result
+    | otherwise = deleteIndex array todelete (index - 1) (result ++ (array !! index))
+
+
 findIndexCentroid :: Double -> Double -> Double -> Int -> [Centroid] -> Int
 findIndexCentroid r g b index array
     | (length array - 1) == index = 0
