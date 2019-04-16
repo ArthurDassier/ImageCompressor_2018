@@ -25,14 +25,15 @@ import Extract
 findIndexCentroid :: Double -> Double -> Double -> Int -> [Centroid] -> Int
 findIndexCentroid r g b index array
     | (length array - 1) == index = 0
-    |  r == (centroidGetR (array !! index)) && g == (centroidGetG (array !! index)) && b == (centroidGetB (array !! index)) = index
+    |  r == (centroidR (array !! index)) && g == (centroidG (array !! index)) && b == (centroidB (array !! index)) = index
     | otherwise = findIndexCentroid r g b (index + 1) array
+
 
 sendRgb :: [Pixel] -> Int -> [Centroid] -> [Centroid] -> [Centroid]
 sendRgb array 0 centroid result = result
 sendRgb array index centroid result = do
-    let centroidIndex = findIndexCentroid (centroidGetR (pixelGetC (array !! index))) (centroidGetG (pixelGetC (array !! index))) (centroidGetB (pixelGetC (array !! index))) 0 centroid
-    sendRgb array (index - 1) centroid (result ++ [(Centroid (centroidGetX (centroid !! centroidIndex)) (centroidGetY (centroid !! centroidIndex)) (centroidGetR (centroid !! centroidIndex)) (centroidGetG (centroid !! centroidIndex)) (centroidGetB (centroid !! centroidIndex)) (centroidGetP (centroid !! centroidIndex) ++ [(array !! index)]))])
+    let centroidIndex = findIndexCentroid (centroidR (pixelCentroid (array !! index))) (centroidG (pixelCentroid (array !! index))) (centroidB (pixelCentroid (array !! index))) 0 centroid
+    sendRgb array (index - 1) centroid (result ++ [(Centroid (centroidX (centroid !! centroidIndex)) (centroidY (centroid !! centroidIndex)) (centroidR (centroid !! centroidIndex)) (centroidG (centroid !! centroidIndex)) (centroidB (centroid !! centroidIndex)) (centroidPixels (centroid !! centroidIndex) ++ [(array !! index)]))])
 
 
 getRandomPixel :: [Pixel] -> Int -> Pixel
