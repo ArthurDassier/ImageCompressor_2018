@@ -21,8 +21,10 @@ import ErrorGest
 main :: IO()
 main = do
     args <- getArgs
-    checkArg args
+    checkArgs args
     open <- try (openFile (last args) ReadMode) :: IO (Either SomeException Handle)
+    let n = (read (args !! 0) :: Int)
+    let convergence = (read (args !! 1) :: Double)
     case open of
         Left err -> exitWith (ExitFailure 84)
         Right result -> do
@@ -30,6 +32,6 @@ main = do
             let struct = (makeStructIO (words contents) [])
             if struct == Nothing then exitWith (ExitFailure 84) else do
                 let struct = (makeStruct (words contents) [])
-                let centroid = fromRandomToCendroid 0 struct 3 []
+                let centroid = fromRandomToCendroid 0 struct n []
                 let test = findNearestCentroid 0 struct [] centroid
-                printEnd (run [] centroid test)
+                printEnd (run [] centroid test convergence)

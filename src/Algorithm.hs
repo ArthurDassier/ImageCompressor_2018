@@ -36,10 +36,10 @@ checkEnd before after index c
     | (centroidR (after !! index)) - (centroidR (before !! index)) > c || (centroidG (after !! index)) - (centroidG (before !! index)) > c || (centroidB (after !! index)) - (centroidB (before !! index)) > c = False
     | otherwise = checkEnd before after (index + 1) c
 
-run :: [Centroid] -> [Centroid] -> [Pixel] -> [Centroid]
-run before after pixel
-    | (checkEnd before after 0 0.3) == True = before
-    | otherwise = run after (createNewCentroid (length after - 1) (pixel) after []) pixel
+run :: [Centroid] -> [Centroid] -> [Pixel] -> Double -> [Centroid]
+run before after pixel c
+    | (checkEnd before after 0 c) == True = before
+    | otherwise = run after (createNewCentroid (length after - 1) (pixel) after []) pixel c
 
 distance :: Color -> Color -> Double
 distance (ux, uy, uz) (vx, vy, vz) = sqrt (((ux - vx) ^ 2) + ((uy - vy) ^ 2) + ((uz - vz) ^ 2))

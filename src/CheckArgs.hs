@@ -3,7 +3,7 @@
 -- File description:
 -- CheckArgs
 
-module CheckArgs (checkArg) where
+module CheckArgs (checkArgs) where
 
 import System.Exit
 import Text.Read
@@ -17,11 +17,11 @@ printHelp = do
     putStrLn "\tIN\tpath to the file containing the colors of the pixels"
     exitWith (ExitFailure 84)
 
-checkArg :: [String] -> IO()
-checkArg arg
-    | length arg < 3 = printHelp
+checkArgs :: [String] -> IO()
+checkArgs arg
+    | length arg /= 3 = printHelp
     | (readMaybe (head arg) :: Maybe Int) == Nothing = printHelp
-    | (readMaybe (arg !! 1) :: Maybe Int) == Nothing = printHelp
+    | (readMaybe (arg !! 1) :: Maybe Double) == Nothing = printHelp
     | (readMaybe (head arg) :: Maybe Int) < Just 1 = printHelp
-    | (readMaybe (arg !! 1) :: Maybe Int) < Just 0 = printHelp
+    | (readMaybe (arg !! 1) :: Maybe Double) < Just 0 = printHelp
     | otherwise = return ()
