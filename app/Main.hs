@@ -20,4 +20,3 @@ main = do
     let centroid = fromRandomToCendroid 0 struct 3 []
     let test = findNearestCentroid 0 struct [] centroid
     print (run [] centroid test)
-    -- print "a"

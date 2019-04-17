@@ -4,7 +4,7 @@
 -- Algorithm
 
 module Algorithm where
-
+import Debug.Trace
 import Extract
 import Parsing
 
@@ -31,15 +31,15 @@ createNewCentroid index pixels centroid result = do
 checkEnd :: [Centroid] -> [Centroid] -> Int -> Double -> Bool
 checkEnd [] _ _ _ = False
 checkEnd _ [] _ _ = False
-checkEnd before after index c = True
-    -- | index == (length (before)) = True
-    -- | (centroidR (after !! index)) - (centroidR (before !! index)) > c || (centroidG (after !! index)) - (centroidG (before !! index)) > c || (centroidB (after !! index)) - (centroidB (before !! index)) > c = False
-    -- | otherwise = checkEnd before after (index + 1) c
+checkEnd before after index c
+    | index == (length (before)) = True
+    | (centroidR (after !! index)) - (centroidR (before !! index)) > c || (centroidG (after !! index)) - (centroidG (before !! index)) > c || (centroidB (after !! index)) - (centroidB (before !! index)) > c = False
+    | otherwise = checkEnd before after (index + 1) c
 
 run :: [Centroid] -> [Centroid] -> [Pixel] -> [Centroid]
 run before after pixel
-    | (checkEnd before after 0 0.3) == True = after
-    | otherwise = run after (createNewCentroid (length after) (findNearestCentroid 0 pixel [] (fromRandomToCendroid 0 pixel 3 [])) after []) pixel
+    | (checkEnd before after 0 0.3) == True = before
+    | otherwise = run after (createNewCentroid (length after - 1) (pixel) after []) pixel
 
 distance :: Color -> Color -> Double
 distance (ux, uy, uz) (vx, vy, vz) = sqrt (((ux - vx) ^ 2) + ((uy - vy) ^ 2) + ((uz - vz) ^ 2))
