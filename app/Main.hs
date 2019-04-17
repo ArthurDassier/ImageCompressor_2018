@@ -18,6 +18,12 @@ getRGB centroid (sumR, sumG, sumB) array index number
     | centroid == (pixelCentroid (array !! index)) = getRGB centroid (sumR + pixelR (array !! index), sumG + pixelG (array !! index), sumB + pixelB (array !! index)) array (index + 1) (number + 1)
     | otherwise = getRGB centroid (sumR, sumG, sumB) array (index + 1) (number)
 
+-- deleteIndex :: [Centroid] -> Int -> Int -> [Centroid] -> [Centroid]
+-- deleteIndex array todelete index result
+--     | index == 0 = result
+--     | index == todelete = deleteIndex array todelete (index - 1) result
+--     | otherwise = deleteIndex array todelete (index - 1) (result ++ (array !! index))
+
 getRandomPixel :: [Pixel] -> Int -> Pixel
 getRandomPixel array n = (array !! n)
 
