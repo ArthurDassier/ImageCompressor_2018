@@ -14,6 +14,8 @@ import Parsing
 import Algorithm
 import Extract
 import CheckArgs
+import Print
+import ErrorGest
 
 
 getRGB:: Centroid -> Color -> [Pixel] -> Int -> Double -> Color
@@ -38,14 +40,6 @@ createNewCentroid index pixels centroid result = do
     let newRGB = getRGB (centroid !! index) (0, 0, 0) pixels 0 0
     createNewCentroid (index - 1) pixels centroid (result ++ [(Centroid (centroidX (centroid !! index)) (centroidY (centroid !! index)) (fstt newRGB) (sndt newRGB) (endt newRGB))])
 
-printEnd :: [Centroid] -> IO()
-printEnd array
-    | (length array) == 0 = return ()
-    | otherwise = do
-        putStrLn "--"
-        print (head array)
-        putStrLn "-"
-        printEnd (tail array)
 
 main :: IO()
 main = do

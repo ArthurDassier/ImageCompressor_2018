@@ -11,7 +11,9 @@ SRC	=	./app/Main.hs		\
 		./src/Parsing.hs	\
 		./src/Extract.hs	\
 		./src/Algorithm.hs	\
-		./src/CheckArgs.hs		\
+		./src/CheckArgs.hs	\
+		./src/Print.hs		\
+		./src/ErrorGest.hs	\
 
 all:	$(NAME)
 
