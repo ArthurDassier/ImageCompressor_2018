@@ -7,13 +7,15 @@ module Extract where
 
 type Point = (Int, Int)
 type Color = (Double, Double, Double)
+type Sum = (Double, Double, Double, Int)
+
 
 data Centroid = Centroid {centroidX :: Int,
                           centroidY :: Int,
                           centroidR :: Double,
                           centroidG :: Double,
-                          centroidB :: Double,
-                          centroidPixels :: [Pixel]} deriving (Show)
+                          centroidB :: Double
+                          } deriving (Show, Eq)
 
 data Pixel = Pixel {pixelX :: Int,
                     pixelY :: Int,

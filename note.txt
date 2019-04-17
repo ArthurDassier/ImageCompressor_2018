@@ -1,21 +1,21 @@
 Étape 1:
 
-1 - Choisir N point centroids
+1 - Choisir N point centroids // Fait
 
-2 - Rattacher lesautres point à leur centroid le plus proche
+2 - Rattacher lesautres point à leur centroid le plus proche // Fait
 
-3 - Calculer la distance (?) moyenne entre les points d'un centroid
+3 - Calculer la distance (?) moyenne entre les points d'un centroid // Fait
 
-4 - Sauvegarder ?
+4 - Sauvegarder ? // Fait
 
 Étape 2 :
 
-1 -Récuperer les points moyens des centroids
+1 -Récuperer les points moyens des centroids // Fait
 
-2  Rattacher les autres point à leur centroid le plus proche
+2  Rattacher les autres point à leur centroid le plus proche // Fait
 
-3 - Calculer la distance (?) moyenne entre les points des nouveaux centroids
+3 - Calculer la distance (?) moyenne entre les points des nouveaux centroids// Fait
 
-4 - Sauvegarder ?
+4 - Sauvegarder ? // Fait
 
 Tant que l'ecart entre (?) et son ancienne valeur (sauvegarde) n'est pas inférieur à la convergence -> Étape 2

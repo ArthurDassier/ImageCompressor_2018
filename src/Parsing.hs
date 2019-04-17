@@ -9,7 +9,7 @@ import Extract
 
 
 makeCentroid :: Pixel -> Centroid
-makeCentroid (Pixel {pixelX = x, pixelY = y, pixelR = r, pixelG = g, pixelB = b}) = (Centroid (x) (y) (r) (g) (b) [])
+makeCentroid (Pixel {pixelX = x, pixelY = y, pixelR = r, pixelG = g, pixelB = b}) = (Centroid (x) (y) (r) (g) (b))
 
 
 chooseCentroid :: [Pixel] -> Int -> [Centroid] -> [Centroid]
@@ -26,7 +26,7 @@ makePoint toRead = read toRead :: (Int, Int)
 
 
 makePixel :: Point -> Color -> Pixel
-makePixel point color = (Pixel (fst point) (snd point) (fstt color) (sndt color) (endt color) ((Centroid (0) (0) (0) (0) (0) [])))
+makePixel point color = (Pixel (fst point) (snd point) (fstt color) (sndt color) (endt color) ((Centroid (0) (0) (0) (0) (0))))
 
 
 makeStruct :: [String] -> [Pixel] -> [Pixel]
