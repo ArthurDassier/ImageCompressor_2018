@@ -22,7 +22,7 @@ data Pixel = Pixel {pixelX :: Int,
                     pixelR :: Double,
                     pixelG :: Double,
                     pixelB :: Double,
-                    pixelCentroid :: Centroid} deriving (Show)
+                    pixelCentroid :: Centroid} deriving (Show, Eq)
 
 
 fstt :: (Color) -> Double
