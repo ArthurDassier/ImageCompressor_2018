@@ -9,11 +9,11 @@ import System.Environment
 import System.Random
 import System.Exit
 import Debug.Trace
-import Text.Read
 
 import Parsing
 import Algorithm
 import Extract
+import CheckArgs
 
 
 getRGB:: Centroid -> Color -> [Pixel] -> Int -> Double -> Color
@@ -38,22 +38,20 @@ createNewCentroid index pixels centroid result = do
     let newRGB = getRGB (centroid !! index) (0, 0, 0) pixels 0 0
     createNewCentroid (index - 1) pixels centroid (result ++ [(Centroid (centroidX (centroid !! index)) (centroidY (centroid !! index)) (fstt newRGB) (sndt newRGB) (endt newRGB))])
 
-
-checkArg :: [String] -> IO()
-checkArg arg
-    | length arg < 3 = exitWith (ExitFailure 84)
-    | (readMaybe (head arg) :: Maybe Int) == Nothing = exitWith (ExitFailure 84)
-    | (readMaybe (arg !! 1) :: Maybe Int) == Nothing = exitWith (ExitFailure 84)
-    | (readMaybe (head arg) :: Maybe Int) < Just 1 = exitWith (ExitFailure 84)
-    | (readMaybe (arg !! 1) :: Maybe Int) < Just 0 = exitWith (ExitFailure 84)
-    | otherwise = return ()
-
+printEnd :: [Centroid] -> IO()
+printEnd array
+    | (length array) == 0 = return ()
+    | otherwise = do
+        putStrLn "--"
+        print (head array)
+        putStrLn "-"
+        printEnd (tail array)
 
 main :: IO()
 main = do
     args <- getArgs
     checkArg args
-    open <- try (openFile (last arg) ReadMode) :: IO (Either SomeException Handle)
+    open <- try (openFile (last args) ReadMode) :: IO (Either SomeException Handle)
     case open of
         Left err -> exitWith (ExitFailure 84)
         Right result -> do
@@ -63,4 +61,4 @@ main = do
                 let struct = (makeStruct (words contents) [])
                 let centroid = fromRandomToCendroid 0 struct 3 []
                 let test = findNearestCentroid 0 struct [] centroid
-                print "ok"
+                printEnd centroid
