@@ -35,3 +35,4 @@ main = do
                 let centroid = fromRandomToCendroid 0 struct n []
                 let test = findNearestCentroid 0 struct [] centroid
                 printEnd (run [] centroid test convergence)
+               -- putStrLn (showDetails (1, 2) (3.0, 4.0, 5.0))
