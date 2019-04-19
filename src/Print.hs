@@ -7,10 +7,11 @@ module Print (printEnd) where
 
 import Extract
 
+findPoint:: Centroid -> Int -> [Pixel] -> [Pixel]
+findPoint centroid index result
 
 printRGB :: Centroid -> (Color)
 printRGB centroid = (centroidR centroid, centroidG centroid, centroidB centroid)
-
 
 printEnd :: [Centroid] -> IO()
 printEnd array
