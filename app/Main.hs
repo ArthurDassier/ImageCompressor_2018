@@ -34,4 +34,6 @@ main = do
                 let struct = (makeStruct (words contents) [])
                 let centroid = fromRandomToCendroid 0 struct n []
                 let test = findNearestCentroid 0 struct [] centroid
-                printEnd (run [] centroid test convergence)
+                let final = run [] centroid test convergence
+                printEnd final (findNearestCentroid 0 struct [] final)
+               -- putStrLn (showDetails (1, 2) (3.0, 4.0, 5.0))

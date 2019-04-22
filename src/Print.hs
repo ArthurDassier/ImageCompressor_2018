@@ -3,21 +3,39 @@
 -- File description:
 -- Print
 
-module Print (printEnd) where
+module Print (printEnd, showDetails) where
 
 import Extract
+import Debug.Trace
+--
+printPoint:: Centroid -> Int -> [Pixel] -> IO ()
+printPoint centroid index pixel =
+    if index == (length pixel) then return ()
+        else if (pixelCentroid (pixel !! index) == centroid) then do
+            putStrLn(showDetails (printXYPixel (pixel !! index)) (printRGBPixel (pixel !! index)))
+            printPoint centroid (index + 1) pixel
+    else
+        printPoint centroid (index + 1) pixel
 
-findPoint:: Centroid -> Int -> [Pixel] -> [Pixel]
-findPoint centroid index result
+printRGBCentroid :: Centroid -> (Color)
+printRGBCentroid centroid = (centroidR centroid, centroidG centroid, centroidB centroid)
 
-printRGB :: Centroid -> (Color)
-printRGB centroid = (centroidR centroid, centroidG centroid, centroidB centroid)
 
-printEnd :: [Centroid] -> IO()
-printEnd array
-    | (length array) == 0 = return ()
+printXYPixel :: Pixel -> (Point)
+printXYPixel pixel = (pixelX pixel, pixelY pixel)
+
+printRGBPixel :: Pixel -> (Color)
+printRGBPixel pixel = (pixelR pixel, pixelG pixel, pixelB pixel)
+
+showDetails :: (Point) -> (Color) -> String
+showDetails (x, y) (r, g, b) = "(" ++ show x ++ "," ++ show y ++ ") (" ++ show r ++ "," ++ show g ++ "," ++ show b ++ ")"
+
+printEnd :: [Centroid] -> [Pixel] -> IO()
+printEnd centroid pixel
+    | (length centroid) == 0 = return ()
     | otherwise = do
         putStrLn "--"
-        print (printRGB (head array))
+        print (printRGBCentroid (head centroid))
         putStrLn "-"
-        printEnd (tail array)
+        printPoint (centroid !! 0) 0 pixel
+        printEnd (tail centroid) pixel
