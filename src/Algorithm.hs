@@ -39,7 +39,7 @@ checkEnd before after index c
 run :: [Centroid] -> [Centroid] -> [Pixel] -> Double -> [Centroid]
 run before after pixel c
     | (checkEnd before after 0 c) == True = before
-    | otherwise = run after (createNewCentroid (length after - 1) (pixel) after []) pixel c
+    | otherwise = run after (createNewCentroid (length after - 1) pixel after []) (findNearestCentroid 0 pixel [] after) c
 
 distance :: Color -> Color -> Double
 distance (ux, uy, uz) (vx, vy, vz) = sqrt (((ux - vx) ^ 2) + ((uy - vy) ^ 2) + ((uz - vz) ^ 2))
