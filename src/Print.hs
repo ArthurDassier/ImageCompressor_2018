@@ -28,7 +28,7 @@ printRGBPixel :: Pixel -> (Color)
 printRGBPixel pixel = (pixelR pixel, pixelG pixel, pixelB pixel)
 
 showDetails :: (Point) -> (Color) -> String
-showDetails (x, y) (r, g, b) = "(" ++ show x ++ "," ++ show y ++ ") (" ++ show r ++ "," ++ show g ++ "," ++ show b ++ ")"
+showDetails (x, y) (r, g, b) = "(" ++ show x ++ "," ++ show y ++ ") (" ++ show (round r) ++ "," ++ show (round g) ++ "," ++ show (round b) ++ ")"
 
 printEnd :: [Centroid] -> [Pixel] -> IO()
 printEnd centroid pixel
