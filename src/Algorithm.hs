@@ -10,7 +10,8 @@ import Parsing
 
 getRGB:: Centroid -> Color -> [Pixel] -> Int -> Double -> Color
 getRGB centroid (sumR, sumG, sumB) array index number
-    | length (array) == index = ((sumR / number), (sumG / number), (sumB / number))
+    | length (array) == index && number == 0 = ((sumR), (sumG), (sumB))
+    | length (array) == index && number /= 0 = ((sumR / number), (sumG / number), (sumB / number))
     | centroid == (pixelCentroid (array !! index)) = getRGB centroid (sumR + pixelR (array !! index), sumG + pixelG (array !! index), sumB + pixelB (array !! index)) array (index + 1) (number + 1)
     | otherwise = getRGB centroid (sumR, sumG, sumB) array (index + 1) (number)
 
@@ -33,7 +34,7 @@ checkEnd [] _ _ _ = False
 checkEnd _ [] _ _ = False
 checkEnd before after index c
     | index == (length (before)) = True
-    | (centroidR (after !! index)) - (centroidR (before !! index)) > c || (centroidG (after !! index)) - (centroidG (before !! index)) > c || (centroidB (after !! index)) - (centroidB (before !! index)) > c = False
+    | (centroidR (before !! index)) - (centroidR (before !! index)) > c || (centroidG (before !! index)) - (centroidG (before !! index)) > c || (centroidB (before !! index)) - (centroidB (before !! index)) > c = False
     | otherwise = checkEnd before after (index + 1) c
 
 run :: [Centroid] -> [Centroid] -> [Pixel] -> Double -> [Centroid]

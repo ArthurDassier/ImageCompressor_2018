@@ -32,6 +32,7 @@ main = do
             let struct = (makeStructIO (words contents) [])
             if struct == Nothing then exitWith (ExitFailure 84) else do
                 let struct = (makeStruct (words contents) [])
+                isNInferior struct n
                 let centroid = fromRandomToCendroid 0 struct n []
                 let test = findNearestCentroid 0 struct [] centroid
                 let final = run [] centroid test convergence

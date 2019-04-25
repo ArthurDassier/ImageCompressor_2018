@@ -3,10 +3,11 @@
 -- File description:
 -- CheckArgs
 
-module CheckArgs (checkArgs) where
+module CheckArgs (checkArgs, isNInferior) where
 
 import System.Exit
 import Text.Read
+import Extract
 
 printHelp :: IO()
 printHelp = do
@@ -24,4 +25,9 @@ checkArgs arg
     | (readMaybe (arg !! 1) :: Maybe Double) == Nothing = printHelp
     | (readMaybe (head arg) :: Maybe Int) < Just 1 = printHelp
     | (readMaybe (arg !! 1) :: Maybe Double) < Just 0 = printHelp
+    | otherwise = return ()
+
+isNInferior :: [Pixel] -> Int -> IO()
+isNInferior array n
+    | n > length array = exitWith (ExitFailure 84)
     | otherwise = return ()
