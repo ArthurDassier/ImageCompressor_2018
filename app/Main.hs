@@ -34,7 +34,8 @@ main = do
                 let struct = (makeStruct (words contents) [])
                 isNInferior struct n
                 let centroid = fromRandomToCendroid 0 struct n []
+                -- print centroid
                 let test = findNearestCentroid 0 struct [] centroid
                 let final = run [] centroid test convergence
-                printEnd final (findNearestCentroid 0 struct [] final)
+                printEnd final (findNearestCentroid 0 test [] final)
                -- putStrLn (showDetails (1, 2) (3.0, 4.0, 5.0))

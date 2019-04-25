@@ -34,17 +34,16 @@ checkEnd [] _ _ _ = False
 checkEnd _ [] _ _ = False
 checkEnd before after index c
     | index == (length (before)) = True
-    | (centroidR (before !! index)) - (centroidR (before !! index)) > c || (centroidG (before !! index)) - (centroidG (before !! index)) > c || (centroidB (before !! index)) - (centroidB (before !! index)) > c = False
+    | distance (centroidR (after !! index), centroidG (after !! index), centroidB (after !! index)) (centroidR (before !! index), centroidG (before !! index), centroidB (before !! index)) > c = False
     | otherwise = checkEnd before after (index + 1) c
 
 run :: [Centroid] -> [Centroid] -> [Pixel] -> Double -> [Centroid]
 run before after pixel c
-    | (checkEnd before after 0 c) == True = before
-    | otherwise = run after (createNewCentroid (length after - 1) pixel after []) (findNearestCentroid 0 pixel [] after) c
+    | (checkEnd before (reverse after) 0 c) == True = before
+    | otherwise = run after (createNewCentroid (length after - 1) (pixel) after []) (findNearestCentroid 0 pixel [] (createNewCentroid (length after - 1) (pixel) after [])) c
 
 distance :: Color -> Color -> Double
 distance (ux, uy, uz) (vx, vy, vz) = sqrt (((ux - vx) ^ 2) + ((uy - vy) ^ 2) + ((uz - vz) ^ 2))
-
 
 findMin :: Color -> [Centroid] -> Int -> Centroid -> Centroid
 findMin (ux, uy, uz) centroid idx mini
